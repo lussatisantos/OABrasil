@@ -60,12 +60,34 @@ try:
     pagina_processo['A1'].value = "Numero processo"
     pagina_processo['B1'].value = "Data da distribuicao"
     pagina_processo['C1'].value = "Movimentacoes"
-    # adicionar data de distribuicao
+    # adicionar numero do processo
+    pagina_processo['A2'].value = numero_processo
+    # adicionar data da distruicao
+    pagina_processo['B2'].value = data_distribuicao
     # adicionar movimentaces
+    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3))
+        for celula in linha:
+            celula.value = lista_movimentacoes[index]
+    workbook.save('dados.xlsx')
+    driver.close()
+    driver.switch_to.window(driver.window.handles[0])
 
 except Exception as error:
     # codigo para criar uma pagina do zero e inserir as informacoes
     # acessar pagina do processo
+    pagina_processo = workbook[numero_processo]
     # criar nome das colunas
-    # adicionar data de distribuicao
+    pagina_processo['A1'].value = "Numero processo"
+    pagina_processo['B1'].value = "Data da distribuicao"
+    pagina_processo['C1'].value = "Movimentacoes"
+    # adicionar numero do processo
+    pagina_processo['A2'].value = numero_processo
+    # adicionar data da distruicao
+    pagina_processo['B2'].value = data_distribuicao
     # adicionar movimentaces
+    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3))
+        for celula in linha:
+            celula.value = lista_movimentacoes[index]
+    workbook.save('dados.xlsx')
+    driver.close()
+    driver.switch_to.window(driver.window.handles[0])

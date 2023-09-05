@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from time import sleep
+import openpyxl
 
 numero_oab = 133864
 
@@ -50,3 +51,21 @@ for movimentacao in movimentacoes:
     lista_movimentacoes.append(movimentacao.text)
 
 # guardar tudo no excel, separados por processo
+workbook = openpyxl.load_workbook('dados.xlsx')
+try:
+    # codigo para inserir dados em pagina existente
+    # acessar pagina do processo
+    pagina_processo = workbook[numero_processo]
+    # criar nome das colunas
+    pagina_processo['A1'].value = "Numero processo"
+    pagina_processo['B1'].value = "Data da distribuicao"
+    pagina_processo['C1'].value = "Movimentacoes"
+    # adicionar data de distribuicao
+    # adicionar movimentaces
+
+except Exception as error:
+    # codigo para criar uma pagina do zero e inserir as informacoes
+    # acessar pagina do processo
+    # criar nome das colunas
+    # adicionar data de distribuicao
+    # adicionar movimentaces

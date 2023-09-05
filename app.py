@@ -16,7 +16,7 @@ campo_oab = driver.find_element(By.XPATH, "//input[@id='fPP:Decoration:numeroOAB
 campo_oab.send_keys(numero_oab)
 
 #Selecionar estado
-dropdown_estados = driver.find_element(By.XPAT, "//select[@id='fPP:Decoration:estadoComboOAB']")
+dropdown_estados = driver.find_element(By.XPATH, "//select[@id='fPP:Decoration:estadoComboOAB']")
 opcoes_estados = Select(dropdown_estados)
 opcoes_estados.select_by_visible_text('SP')
 
@@ -32,6 +32,15 @@ for precesso in processos:
     sleep(10)
     janelas = driver.windows_handles
     driver.switch_to.windows(janelas[-1])
+    driver.set_window_size(1920, 1080)
+    numero_processo = driver.find_elements(By.XPATH, "//div[@class='col-sm-12 ']")
+    numero_processo = numero_processo[0]
+    numero_processo = numero_processo.text
+
+    data_distribuicao = driver.find_elements(By.XPATH, "//div[@class='value col-sm-12 ']")
+    data_distribuicao = data_distribuicao[1]
+    data_distribuicao = data_distribuicao.text
+
 #extrair o n* processo e data de distribuicao
 # extrair e guardas todos os ultimos moviementos
 # guardar tudo no excel, separados por processo

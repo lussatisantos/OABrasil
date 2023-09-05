@@ -31,8 +31,8 @@ processos = driver.find_elements(By.XPATH, "//b[@class='btn-block']")
 for precesso in processos:
     precesso.click()
     sleep(10)
-    janelas = driver.windows_handles
-    driver.switch_to.windows(janelas[-1])
+    janelas = driver.window_handles
+    driver.switch_to.window(janelas[-1])
     driver.set_window_size(1920, 1080)
 
 #extrair o n* processo e data de distribuicao
@@ -56,38 +56,50 @@ try:
     # codigo para inserir dados em pagina existente
     # acessar pagina do processo
     pagina_processo = workbook[numero_processo]
+
     # criar nome das colunas
     pagina_processo['A1'].value = "Numero processo"
     pagina_processo['B1'].value = "Data da distribuicao"
     pagina_processo['C1'].value = "Movimentacoes"
+
     # adicionar numero do processo
     pagina_processo['A2'].value = numero_processo
+
     # adicionar data da distruicao
     pagina_processo['B2'].value = data_distribuicao
+
     # adicionar movimentaces
-    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3))
+    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3)):
         for celula in linha:
             celula.value = lista_movimentacoes[index]
     workbook.save('dados.xlsx')
     driver.close()
+    sleep(5)
     driver.switch_to.window(driver.window.handles[0])
 
 except Exception as error:
     # codigo para criar uma pagina do zero e inserir as informacoes
+    workbook.create_sheet()
+
     # acessar pagina do processo
     pagina_processo = workbook[numero_processo]
+
     # criar nome das colunas
     pagina_processo['A1'].value = "Numero processo"
     pagina_processo['B1'].value = "Data da distribuicao"
     pagina_processo['C1'].value = "Movimentacoes"
+
     # adicionar numero do processo
     pagina_processo['A2'].value = numero_processo
+    
     # adicionar data da distruicao
     pagina_processo['B2'].value = data_distribuicao
+    
     # adicionar movimentaces
-    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3))
+    for index, linha in enumerate(pagina_processo.iter_row(min_row=2, max_row=len(lista_movimentacoes), min_col=3, max_col=3)):
         for celula in linha:
             celula.value = lista_movimentacoes[index]
     workbook.save('dados.xlsx')
     driver.close()
+    sleep(5)
     driver.switch_to.window(driver.window.handles[0])

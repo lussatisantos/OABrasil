@@ -33,6 +33,8 @@ for precesso in processos:
     janelas = driver.windows_handles
     driver.switch_to.windows(janelas[-1])
     driver.set_window_size(1920, 1080)
+
+#extrair o n* processo e data de distribuicao
     numero_processo = driver.find_elements(By.XPATH, "//div[@class='col-sm-12 ']")
     numero_processo = numero_processo[0]
     numero_processo = numero_processo.text
@@ -41,7 +43,10 @@ for precesso in processos:
     data_distribuicao = data_distribuicao[1]
     data_distribuicao = data_distribuicao.text
 
-#extrair o n* processo e data de distribuicao
 # extrair e guardas todos os ultimos moviementos
-# guardar tudo no excel, separados por processo
+movimentacoes = driver.find_elements(By.XPATH, "//div[@id='j_id132:processoEventoPanel_body']//tr[contains(@class, 'rich-table-row')]//td//div/div//span")
+lista_movimentacoes = []
+for movimentacao in movimentacoes:
+    lista_movimentacoes.append(movimentacao.text)
 
+# guardar tudo no excel, separados por processo

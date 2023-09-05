@@ -26,6 +26,12 @@ botao_pesquisar.click()
 sleep(10)
 
 # entrar em cada um do processo
+processos = driver.find_elements(By.XPATH, "//b[@class='btn-block']")
+for precesso in processos:
+    precesso.click()
+    sleep(10)
+    janelas = driver.windows_handles
+    driver.switch_to.windows(janelas[-1])
 #extrair o n* processo e data de distribuicao
 # extrair e guardas todos os ultimos moviementos
 # guardar tudo no excel, separados por processo

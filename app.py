@@ -12,7 +12,7 @@ driver.get('https://pje-consulta-publica.tjmg.jus.br/pje/ConsultaPublica/listVie
 sleep(30)
 
 # digitar numero oab
-campo_oab = driver.find_element(By.XPATH, "input[@id='fPP:Decoration:numeroOAB']")
+campo_oab = driver.find_element(By.XPATH, "//input[@id='fPP:Decoration:numeroOAB']")
 campo_oab.send_keys(numero_oab)
 
 #Selecionar estado
